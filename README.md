@@ -1,2 +1,1 @@
-# DDOS
-nhóm 15
+Cam kết chỉ phục vụ việc học
