@@ -1,0 +1,30 @@
+"""Monitoring utilities for the project."""
+
+from typing import Dict, List
+
+
+class DdosMonitor:
+    """Track event history and provide a simple dashboard summary."""
+
+    def __init__(self):
+        self.history: List[Dict[str, object]] = []
+
+    def record(self, source_ip: str, requests: int, timestamp: float):
+        """Store a record in the monitoring history."""
+        self.history.append(
+            {
+                "source_ip": source_ip,
+                "requests": requests,
+                "timestamp": timestamp,
+            }
+        )
+
+    def get_summary(self) -> Dict[str, object]:
+        """Return summary of tracked events."""
+        total_requests = sum(item["requests"] for item in self.history)
+        sources = sorted({item["source_ip"] for item in self.history})
+        return {
+            "total_events": len(self.history),
+            "total_requests": total_requests,
+            "sources": sources,
+        }
